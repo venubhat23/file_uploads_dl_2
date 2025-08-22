@@ -1,0 +1,39 @@
+# Simple Dockerfile optimized for ECS deployment
+FROM ruby:3.2.0-slim
+
+# Install system dependencies
+RUN apt-get update -qq && \
+    apt-get install --no-install-recommends -y \
+    curl \
+    build-essential \
+    git \
+    && rm -rf /var/lib/apt/lists /var/cache/apt/archives
+
+# Set working directory
+WORKDIR /app
+
+# Copy Gemfiles
+COPY Gemfile Gemfile.lock ./
+
+# Install Ruby gems
+RUN bundle install --jobs 4 --retry 3
+
+# Copy application code
+COPY . .
+
+# Create a non-root user
+RUN groupadd --gid 1000 appuser && \
+    useradd --uid 1000 --gid appuser --shell /bin/bash appuser && \
+    chown -R appuser:appuser /app
+
+USER appuser
+
+# Expose port
+EXPOSE 3000
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=3 \
+    CMD curl -f http://localhost:3000/up || exit 1
+
+# Start the server
+CMD ["bundle", "exec", "rails", "server", "-b", "0.0.0.0", "-p", "3000"]
