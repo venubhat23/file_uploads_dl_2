@@ -1,17 +1,19 @@
 version: 1.0
-runtime: ruby32
+runtime: ruby
 build:
   commands:
     build:
-      - echo "Build completed"
+      - echo "Installing dependencies..."
+      - bundle install
+      - echo "Build completed successfully!"
 run:
-  runtime-version: ruby32
-  command: bundle exec rails server -b 0.0.0.0 -p 3000
+  runtime-version: ruby-3.2.0
+  command: bundle exec rails server -b 0.0.0.0 -p 8080
   network:
-    port: 3000
+    port: 8080
     env: PORT
   env:
     - name: RAILS_ENV
       value: production
     - name: PORT
-      value: 3000
+      value: 8080
