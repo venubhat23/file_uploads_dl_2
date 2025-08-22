@@ -1,0 +1,29 @@
+# Copilot service manifest - Simple Rails API configuration
+name: file-upload-service
+type: Load Balanced Web Service
+
+# HTTP configuration
+http:
+  path: '/'
+  healthcheck: '/up'
+
+# Container configuration
+image:
+  build: './Dockerfile.ecs'
+
+# Resources (small and cheap)
+cpu: 256       # 0.25 vCPU
+memory: 512    # 512 MB RAM
+count: 1       # 1 running task
+
+# Environment variables
+variables:
+  RAILS_ENV: production
+  AWS_ACCESS_KEY_ID: AKIAQ2GW57FXBCNIE6X3
+  AWS_SECRET_ACCESS_KEY: PrE8Jl9uTx0PkA9vE7J5ZYo5FUElx/hlpatSIP4S
+  AWS_REGION: us-east-1
+  AWS_S3_BUCKET: your-app-uploads-2024
+
+# Logging
+logging:
+  enable_metadata: true

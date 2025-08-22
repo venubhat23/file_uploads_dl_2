@@ -1,0 +1,14 @@
+# Staging environment configuration
+name: staging
+type: Environment
+
+# Network configuration
+network:
+  vpc:
+    enable_dns: true
+  cdn:
+    enable: false
+
+# Import configuration
+import:
+  vpc_id: ""  # Copilot will create a new VPC
