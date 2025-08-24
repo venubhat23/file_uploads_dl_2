@@ -1,0 +1,19 @@
+[Unit]
+Description=Rails File Upload API Server
+After=network.target
+
+[Service]
+Type=simple
+User=ubuntu
+WorkingDirectory=/home/ubuntu/file_uploads
+Environment=RAILS_ENV=development
+Environment=AWS_ACCESS_KEY_ID=AKIAQ2GW57FXBCNIE6X3
+Environment=AWS_SECRET_ACCESS_KEY=PrE8Jl9uTx0PkA9vE7J5ZYo5FUElx/hlpatSIP4S
+Environment=AWS_REGION=us-east-1
+Environment=AWS_S3_BUCKET=your-app-uploads-2024
+ExecStart=/usr/local/bin/rails server -b 0.0.0.0 -p 3000
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target

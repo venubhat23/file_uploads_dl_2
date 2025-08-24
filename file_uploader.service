@@ -1,0 +1,19 @@
+[Unit]
+Description=File Uploader Rails API
+After=network.target
+
+[Service]
+Type=simple
+User=ubuntu
+WorkingDirectory=/home/ubuntu/file_uploads
+Environment=PATH=/home/ubuntu/.rvm/gems/ruby-3.2.0/bin:/home/ubuntu/.rvm/gems/ruby-3.2.0@global/bin:/home/ubuntu/.rvm/rubies/ruby-3.2.0/bin:/home/ubuntu/.rvm/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+ExecStart=/bin/bash -lc 'cd /home/ubuntu/file_uploads && bundle exec rails s -b 0.0.0.0 -p 3000'
+Restart=always
+Environment="RAILS_ENV=development"
+Environment="AWS_ACCESS_KEY_ID=AKIAQ2GW57FXBCNIE6X3"
+Environment="AWS_SECRET_ACCESS_KEY=PrE8Jl9uTx0PkA9vE7J5ZYo5FUElx/hlpatSIP4S"
+Environment="AWS_REGION=us-east-1"
+Environment="AWS_S3_BUCKET=your-app-uploads-2024"
+
+[Install]
+WantedBy=multi-user.target
