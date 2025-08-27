@@ -33,7 +33,7 @@ gem "thruster", require: false
 # gem "image_processing", "~> 1.2"
 
 # AWS SDK for S3 integration
-gem "aws-sdk-s3", "~> 1.0"
+gem "aws-sdk-s3", "~> 1.198"
 
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin Ajax possible
 gem "rack-cors"
