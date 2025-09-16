@@ -15,7 +15,7 @@ class Api::UploadController < ApplicationController
     begin
       # Upload to S3
       s3_client = Aws::S3::Client.new
-      bucket_name = 'file-upload-2024-milk-delivery'
+      bucket_name = 'file-upload-2024-milk-delivery-latest-1'
       
       s3_client.put_object(
         bucket: bucket_name,
